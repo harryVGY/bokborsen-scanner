@@ -109,14 +109,16 @@ const BarcodeScanner = ({ onScan }) => {
                 }
             });
             
-            // Handle successful detection with confidence tracking
+            // This callback fires continuously whenever Quagga finds a potential barcode in a frame
+            // The scanner is ALWAYS looking for barcodes as long as the camera is active
             Quagga.onDetected((result) => {
                 if (result && result.codeResult) {
                     const code = result.codeResult.code;
                     const format = result.codeResult.format;
                     console.log(`Barcode detected: ${code} (${format}), confidence: ${result.codeResult.confidence}`);
                     
-                    // Only process codes that look like ISBNs
+                    // Filter for valid ISBN formats - we only want book barcodes
+                    // ISBN-13 uses EAN-13 format, ISBN-10 might be detected as other formats
                     if (code && (format === 'ean_13' || format === 'upc_a' || isValidISBN(code))) {
                         // Add to results buffer for confidence tracking
                         resultsBuffer.current.push(code);
