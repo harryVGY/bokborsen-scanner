@@ -19,6 +19,8 @@ const BarcodeScanner = ({ onScan }) => {
 
         setError(null);
         setScanning(true);
+        
+        console.log("Attempting to start scanner...");
 
         Quagga.init({
             inputStream: {
@@ -27,15 +29,30 @@ const BarcodeScanner = ({ onScan }) => {
                 target: scannerRef.current,
                 constraints: {
                     facingMode: "environment", // Use back camera
+                    width: { min: 640 },
+                    height: { min: 480 },
+                    aspectRatio: { min: 1, max: 2 }
                 }
             },
+            locator: {
+                patchSize: "medium",
+                halfSample: true
+            },
+            numOfWorkers: navigator.hardwareConcurrency || 4,
+            frequency: 10,
             decoder: {
                 readers: [
                     "ean_reader",
                     "ean_8_reader",
+                    "isbn_reader",
                     "code_39_reader",
                     "code_128_reader"
-                ]
+                ],
+                debug: {
+                    showCanvas: true,
+                    showPatches: true,
+                    showFoundPatches: true
+                }
             }
         }, (err) => {
             if (err) {
@@ -45,10 +62,16 @@ const BarcodeScanner = ({ onScan }) => {
                 return;
             }
             
+            console.log("Scanner initialized successfully");
             Quagga.start();
             
             // Listen for scan results
+            Quagga.onProcessed(function(result) {
+                console.log("Frame processed");
+            });
+            
             Quagga.onDetected((result) => {
+                console.log("Barcode detected:", result.codeResult.code);
                 if (result && result.codeResult) {
                     const isbn = result.codeResult.code;
                     if (isbn) {
