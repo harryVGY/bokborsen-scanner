@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/bokborsen-scanner/static/css/main.6e5f5497.css",
+    "main.js": "/bokborsen-scanner/static/js/main.fc5dbf00.js",
+    "index.html": "/bokborsen-scanner/index.html",
+    "main.6e5f5497.css.map": "/bokborsen-scanner/static/css/main.6e5f5497.css.map",
+    "main.fc5dbf00.js.map": "/bokborsen-scanner/static/js/main.fc5dbf00.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6e5f5497.css",
+    "static/js/main.fc5dbf00.js"
+  ]
+}
