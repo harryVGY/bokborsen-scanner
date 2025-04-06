@@ -1,0 +1,40 @@
+{
+  "name": "bokborsen-scanner",
+  "version": "1.0.0",
+  "description": "En app som skannar ISBN koder och hämtar bokinfo från Bokbörsen",
+  "homepage": "https://harryVGY.github.io/bokborsen-scanner",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "dependencies": {
+    "@ericblade/quagga2": "^1.8.2",
+    "axios": "^0.27.2",
+    "cheerio": "^1.0.0-rc.12",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-plugin-react": "^7.30.0",
+    "gh-pages": "^6.3.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
